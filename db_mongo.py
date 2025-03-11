@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-import locale
 from datetime import datetime
 
 
@@ -10,7 +9,6 @@ db = client["licitacao"]
 colecao = db["pncp"]
 
 # Configurar locale para formato monetário brasileiro
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 
 
@@ -65,7 +63,7 @@ def encontrar_pertinentes():
         link = f'https://pncp.gov.br/app/editais/{cli_CtPNCP}/{ano_CtPNCP}/{num_CtPNCP}'
         
         list_registros.append({
-            'valorTotalEstimado': locale.currency(documento['valorTotalEstimado'], grouping=True, symbol="R$ ")
+            'valorTotalEstimado': str(documento['valorTotalEstimado'])
             ,'dataEncerramentoProposta':str(documento['dataEncerramentoProposta']).replace('T',' ')
             ,'objetoCompra':documento['objetoCompra']
             ,'link':link
